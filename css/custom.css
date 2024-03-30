@@ -38,4 +38,16 @@
 .italic-text {
   font-style: italic;
 }
+.card-body {
+  position: relative;
+}
 
+.read-more {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+
+.full-description {
+  display: none;
+}
