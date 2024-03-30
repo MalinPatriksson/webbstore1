@@ -1,0 +1,13 @@
+.product-container img {
+    height: 240px;
+    object-fit: scale-down;
+    background-color: white;
+}
+
+.card-title {
+    font-weight: 400;
+}
+
+.product-button {
+    padding-top: 0;
+}

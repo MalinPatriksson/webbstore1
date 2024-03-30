@@ -1,0 +1,41 @@
+.navbar {
+    background-color: rgba(72, 78, 84, 0.294);
+    font-family: 'Roboto', sans-serif; /* Typsnitt */
+    margin: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+}
+
+  .navbar-brand {
+    font-size: 2.0rem;
+  }
+  
+.btn-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.nav-item{
+  font-size: 20px;
+}
+
+.centeredX {
+  position: relative;
+  top: 99%;
+  left: 50%;
+  transform: translate(-50%, -1%);
+}
+
+.startPageImage {display: inline-block; max-width: 800px; max-height: 800px;}
+
+.startPageImage img {max-width: 100%; height:auto;}
+
+.custom-bg-col {
+  background-color: rgba(45, 105, 194, 0.24);
+}
+.italic-text {
+  font-style: italic;
+}
+
