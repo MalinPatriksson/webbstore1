@@ -42,9 +42,8 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-
+    // Funktion för att rendera en produkt i varukorgen
     function renderProduct(product) {
-        // Skapa HTML-element för att visa produktens information
         const productElement = document.createElement('div');
         productElement.classList.add('cart-item');
         productElement.innerHTML = `
@@ -82,7 +81,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
     
 
-
+// Funktion för att beräkna den totala summan för produkterna i varukorgen
 function calculateTotal() {
     const cart = JSON.parse(localStorage.getItem("cart"));
     let total = 0;
@@ -105,6 +104,7 @@ function updateTotal() {
     }
 }
 
+// Funktion för att uppdatera summan för en specifik produkt när antalet ändras
 function calculateAmount() {
     const cart = JSON.parse(localStorage.getItem("cart"));
     let amount = 0;
@@ -127,6 +127,7 @@ function updateAmount(productName) {
     }
 }
 
+// Funktion för att öka kvantiteten för en produkt
 function increaseQuantity(event) {
     const productName = event.target.getAttribute('data-name');
     const cart = JSON.parse(localStorage.getItem("cart"));
@@ -153,6 +154,7 @@ function increaseQuantity(event) {
     }
 }
 
+// Funktion för att minska kvantiteten för en produkt
 function decreaseQuantity(event) {
     const productName = event.target.getAttribute('data-name');
     const cart = JSON.parse(localStorage.getItem("cart"));
@@ -179,7 +181,7 @@ function decreaseQuantity(event) {
     }
 }
 
-
+// Funktion för att ta bort en produkt från varukorgen
 function removeProduct(productName) {
     const cart = JSON.parse(localStorage.getItem("cart"));
 
@@ -198,7 +200,7 @@ function removeProduct(productName) {
     }
 }
 
-
+// Funktion för att tömma varukorgen helt
 function emptyCart() {
     // Ta bort hela varukorgen från localStorage
     localStorage.removeItem("cart");
