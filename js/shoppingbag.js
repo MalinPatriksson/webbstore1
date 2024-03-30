@@ -34,10 +34,11 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+    // Lägg till händelselyssnare för att ta bort en produkt från varukorgen
     const checkoutButton = document.getElementById("checkout-btn");
     if (checkoutButton) {
         checkoutButton.addEventListener("click", function () {
-            location.href = "order.html"; // Ändra URL till din beställningssida
+            location.href = "order.html";
         });
     }
 
@@ -62,7 +63,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         <span class="fw-bold fs-5 italic-text">$</span>
                         <span class="price fw-bold fs-5 italic-text" id="amount-${product.name}">${(product.price * product.quantity).toFixed(2)}</span>
                         </div>
-                        <button class="btn btn-sm btn-secondary remove-product" data-name="${product.name}">X</button>
+                        <button class="btn btn-sm btn-secondary remove-product" data-name="${product.name}">Ta bort</button>
                     </div>
                 </div>
             </div> 
@@ -122,7 +123,7 @@ function updateAmount(productName) {
 
     const amountElement = document.getElementById(`amount-${productName}`);
     if (amountElement) {
-        amountElement.innerText = `$${(product.price * product.quantity).toFixed(2)}`; // Uppdatera priset med dollartecknet
+        amountElement.innerText = `$${(product.price * product.quantity).toFixed(2)}`; 
     }
 }
 
