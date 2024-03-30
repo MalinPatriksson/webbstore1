@@ -34,7 +34,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-
     const checkoutButton = document.getElementById("checkout-btn");
     if (checkoutButton) {
         checkoutButton.addEventListener("click", function () {
@@ -42,31 +41,45 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-function renderProduct(product) {
-    // Skapa HTML-element för att visa produktens information
-    const productElement = document.createElement('div');
-    productElement.classList.add('cart-item');
-    productElement.innerHTML = `
-        <div class="row align-items-center">
-            <div class="col-md-2">
-                <img src="${product.image}" alt="${product.name}" class="product-image img-fluid rounded border mb-3 me-1" width="200" height="200">
-            </div>
-            <div class="col-md-8">
-                <h3 class="fw-bold">${product.name}</h3>
-                <div class="quantity-controls d-flex align-items-center">
-                    <button class="btn btn-sm btn-primary decrease-quantity me-1" data-name="${product.name}"><</button>
-                    <span class="product-quantity me-1 fw-bold" id="product-quantity-${product.name}">${product.quantity}</span>
-                    <button class="btn btn-sm btn-primary increase-quantity me-1" data-name="${product.name}">></button>
-                    <span class="fw-bold fs-5 italic-text">$</span>
-                    <span class="price fw-bold fs-5 italic-text" id="amount-${product.name}">${(product.price * product.quantity).toFixed(2)}</span>
-                </div>
-            </div>
-        </div>
-    `;
 
-    // Lägg till produkt-elementet i varukorgen
-    document.getElementById('cart').appendChild(productElement);
-}
+    function renderProduct(product) {
+        // Skapa HTML-element för att visa produktens information
+        const productElement = document.createElement('div');
+        productElement.classList.add('cart-item');
+        productElement.innerHTML = `
+            <div class="row align-items-center">
+                <div class="col-md-2">
+                    <img src="${product.image}" alt="${product.name}" class="product-image img-fluid rounded border mb-3 me-1" width="200" height="200">
+                </div>
+                <div class="col-md-8">
+                
+                    <h3 class="fw-bold">${product.name}</h3>
+                    <div class="d-flex justify-content-between align-items-center">
+                    <div class="quantity-controls d-flex align-items-center">
+                        <button class="btn btn-sm btn-primary decrease-quantity me-1" data-name="${product.name}"><</button>
+                        <span class="product-quantity me-1 fw-bold" id="product-quantity-${product.name}">${product.quantity}</span>
+                        <button class="btn btn-sm btn-primary increase-quantity me-1" data-name="${product.name}">></button>
+                        <span class="fw-bold fs-5 italic-text">$</span>
+                        <span class="price fw-bold fs-5 italic-text" id="amount-${product.name}">${(product.price * product.quantity).toFixed(2)}</span>
+                        </div>
+                        <button class="btn btn-sm btn-secondary remove-product" data-name="${product.name}">X</button>
+                    </div>
+                </div>
+            </div> 
+        `;
+    
+        // Lägg till produkt-elementet i varukorgen
+        document.getElementById('cart').appendChild(productElement);
+    }
+    
+    // Eventlyssnare för att ta bort en produkt från varukorgen
+    document.addEventListener('click', function(event) {
+        if (event.target.classList.contains('remove-product')) {
+            const productName = event.target.getAttribute('data-name');
+            removeProduct(productName);
+        }
+    });
+    
 
 
 function calculateTotal() {
@@ -166,17 +179,24 @@ function decreaseQuantity(event) {
 }
 
 
-function removeProduct(product) {
+function removeProduct(productName) {
     const cart = JSON.parse(localStorage.getItem("cart"));
 
     if (cart && cart.length > 0) {
-        const updatedCart = cart.filter((p) => p.name !== product.name);
+        const updatedCart = cart.filter((product) => product.name !== productName);
         localStorage.setItem("cart", JSON.stringify(updatedCart));
-        updateAmount();
-        updateTotal(); // Uppdatera summan när antalet ändras
+        updateTotal(); // Uppdatera totalbeloppet efter borttagning av produkt
         updateCartCount(); // Uppdatera antalet produkter i varukorgen
+
+        // Uppdatera varukorgen på sidan efter borttagning av produkt
+        const cartElement = document.getElementById('cart');
+        cartElement.innerHTML = '';
+        updatedCart.forEach(product => {
+            renderProduct(product);
+        });
     }
 }
+
 
 function emptyCart() {
     // Ta bort hela varukorgen från localStorage
