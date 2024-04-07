@@ -51,3 +51,9 @@
 .full-description {
   display: none;
 }
+
+.product-card .btn-order {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
