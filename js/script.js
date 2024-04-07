@@ -27,17 +27,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Skapa produktens HTML
         productCard.innerHTML = `
-          <div class="card h-100">
-            <img class="card-img-top" src="${product.image}" alt="${product.title}">
-            <div class="card-body">
-              <h5 class="card-title">${product.title}</h5>
-              <p class="card-text description" style="display: none;">${product.description}</p>
-              <button class="btn btn-link btn-sm read-more">Läs mer</button>
-              <div class="d-flex justify-content-between align-items-center">
-                <button class="btn btn-primary btn-order" data-image="${product.image}">Beställ</button>
-              </div>
-            </div>
+        <div class="card h-100 d-flex flex-column">
+          <img class="card-img-top" src="${product.image}" alt="${product.title}">
+          <div class="card-body d-flex flex-column">
+           <h5 class="card-title">${product.title}</h5>
+           <p class="card-text description" style="display: none;">${product.description}</p>
+           <button class="btn btn-link btn-sm read-more">Läs mer</button>
+           <div class="mt-auto">
+              <button class="btn btn-primary btn-order" data-image="${product.image}">Beställ</button>
           </div>
+         </div>
+        </div>
         `;
 
         // Lägg till produktkortet i produktlistan
@@ -47,15 +47,6 @@ document.addEventListener("DOMContentLoaded", function () {
     .catch((error) => {
       console.error("Fetch error:", error);
     });
-
-  // Funktion för att förkorta text
-  function truncateText(text, maxLength) {
-    if (text.length > maxLength) {
-      return text.slice(0, maxLength) + "...";
-    } else {
-      return text;
-    }
-  }
 
   // Hantera klickhändelser för "Läs mer" -knapp
   document.addEventListener("click", function (event) {
